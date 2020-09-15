@@ -20,7 +20,11 @@
   "homepage": "https://github.com/hishamss/GoMeeting#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.5",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "mongoose": "^5.10.5"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.4"
   }
 }
