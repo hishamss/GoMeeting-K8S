@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
+const meetingSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -22,4 +22,4 @@ const eventSchema = new Schema({
   ],
 });
 // Export the model to app.js
-module.exports = mongoose.model("meeting", eventSchema);
+module.exports = mongoose.model("meeting", meetingSchema);

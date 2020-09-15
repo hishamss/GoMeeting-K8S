@@ -1,4 +1,4 @@
 module.exports = {
-  Meetings: require("./guests"),
-  Guests: require("./meetings"),
+  Guests: require("./guests"),
+  Meetings: require("./meetings"),
 };

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
+const guestSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -12,4 +12,4 @@ const eventSchema = new Schema({
   },
 });
 // Export the model to app.js
-module.exports = mongoose.model("guest", eventSchema);
+module.exports = mongoose.model("guest", guestSchema);

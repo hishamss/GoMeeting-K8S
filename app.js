@@ -3,7 +3,20 @@ const app = express();
 const PORT = 3001;
 const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
+const { graphqlHTTP } = require("express-graphql");
+const graphQlSchema = require("./graphql/schema");
+const graphQlResolvers = require("./graphql/resolvers");
 app.use(express.json());
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphQlSchema,
+    // Resolver
+    rootValue: graphQlResolvers,
+    graphiql: true,
+  })
+);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
