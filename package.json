@@ -1,0 +1,26 @@
+{
+  "name": "GoMeeting",
+  "version": "1.0.0",
+  "description": "NodeJS/ReactJS app to schedule meetings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startDev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hishamss/GoMeeting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hishamss/GoMeeting/issues"
+  },
+  "homepage": "https://github.com/hishamss/GoMeeting#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.4"
+  }
+}
