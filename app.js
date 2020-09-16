@@ -6,6 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 const { graphqlHTTP } = require("express-graphql");
 const graphQlSchema = require("./graphql/schema");
 const graphQlResolvers = require("./graphql/resolvers");
+const db = require("./models");
 app.use(express.json());
 
 app.use(
@@ -18,9 +19,9 @@ app.use(
   })
 );
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// });
 
 mongoose
   .connect("mongodb://localhost/go_meetings", {

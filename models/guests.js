@@ -8,8 +8,8 @@ const guestSchema = new Schema({
   },
   meeting: {
     type: Schema.Types.ObjectId,
-    ref: "meeting",
+    ref: "meetings",
   },
 });
 // Export the model to app.js
-module.exports = mongoose.model("guest", guestSchema);
+module.exports = mongoose.model("guests", guestSchema);

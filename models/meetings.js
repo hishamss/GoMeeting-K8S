@@ -17,9 +17,9 @@ const meetingSchema = new Schema({
   guests: [
     {
       type: Schema.Types.ObjectId,
-      ref: "guest",
+      ref: "guests",
     },
   ],
 });
 // Export the model to app.js
-module.exports = mongoose.model("meeting", meetingSchema);
+module.exports = mongoose.model("meetings", meetingSchema);

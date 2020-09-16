@@ -5,6 +5,7 @@ module.exports = buildSchema(`
 type Guest {
     _id: ID!
     email: String!
+    meeting: Meeting
 }
 
 type Meeting {
@@ -12,9 +13,13 @@ type Meeting {
     name: String!
     host: String!
     date: String!
+    guests: [Guest!]
     
 }
 
+input GuestInput {
+    email: String!   
+}
 input MeetingInput {
     name: String!
     host: String!
@@ -29,7 +34,7 @@ type RootQuery {
 
 type RootMutation {
     createMeeting(meetingInput: MeetingInput): Meeting
-    addGuest(email: String!, meetingId: ID!): Guest!
+    addGuest(guestInput: GuestInput): Guest
 }
 schema {
     query: RootQuery

@@ -11,7 +11,20 @@ module.exports = {
 
       return { ...result._doc };
     } catch (err) {
-      console.log("MongodDB: ", err);
+      console.log("//////////////////////MongodDB: ", err);
+      throw err;
+    }
+  },
+  meetings: async () => {
+    try {
+      let result = await db.Meetings.find().populate("guests");
+      return result.map((row) => {
+        return {
+          ...row._doc,
+        };
+      });
+    } catch (err) {
+      console.log(err);
       throw err;
     }
   },
