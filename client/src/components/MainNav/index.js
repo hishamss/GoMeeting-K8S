@@ -19,11 +19,7 @@ const MainNav = () => {
       {/* ml-auto to align Nav to the right */}
       <Nav className="ml-auto">
         {isAuthenticated && <p>{user.email}</p>}
-        {isAuthenticated ? (
-          <button onClick={() => logout()}>Logout</button>
-        ) : (
-          <button onClick={() => loginWithRedirect()}>Login</button>
-        )}
+        {isAuthenticated && <button onClick={() => logout()}>Logout</button>}
       </Nav>
     </Navbar>
   );

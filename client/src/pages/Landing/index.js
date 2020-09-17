@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./style.css";
 const Landing = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <div id="landingCont">
       <div id="landingDiv" className="text-center">
@@ -18,13 +20,7 @@ const Landing = () => {
         </div>
         <br />
         <div id="landingD" className="text-center">
-          <Button
-            style={{
-              backgroundColor: "#e83151",
-              borderColor: "#e83151",
-              fontSize: "1.7rem",
-            }}
-          >
+          <Button id="joinGoMeeting" onClick={() => loginWithRedirect()}>
             Join GoMeeting
           </Button>
         </div>
