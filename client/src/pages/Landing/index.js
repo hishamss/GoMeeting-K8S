@@ -9,6 +9,7 @@ const Landing = () => {
       <div id="landingDiv" className="text-center">
         <img
           src="/meetTogother.png"
+          alt="Login-img"
           width="400"
           height="300"
           style={{ opacity: "0.75" }}
