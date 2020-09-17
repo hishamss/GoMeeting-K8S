@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Navbar, NavDropdown } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
@@ -11,10 +11,17 @@ const MainNav = () => {
         <img id="logo_img" alt="Logo" src="goMeeting.png" />
       </Navbar.Brand>
       {/* ml-auto to align Nav to the right */}
-      <Nav className="ml-auto">
-        {isAuthenticated && <p>{user.email}</p>}
-        {isAuthenticated && <button onClick={() => logout()}>Logout</button>}
-      </Nav>
+      {isAuthenticated && (
+        <NavDropdown className="ml-auto" title="Menu" id="basic-nav-dropdown">
+          <NavDropdown.Item href="#" role="button">
+            {user.email}
+          </NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="#" role="button" onClick={() => logout()}>
+            Logout
+          </NavDropdown.Item>
+        </NavDropdown>
+      )}
     </Navbar>
   );
 };
