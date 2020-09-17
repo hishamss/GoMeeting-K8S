@@ -12,3 +12,13 @@
   left: auto;
   right: 0;
 }
+
+#basic-nav-dropdown {
+  color: white;
+  font-size: 1.5rem;
+}
+
+#basic-nav-dropdown:hover,
+#basic-nav-dropdown:active {
+  font-weight: bold;
+}
