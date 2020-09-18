@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import MainNav from "./components/MainNav";
 import Landing from "./pages/Landing";
+import Hosted from "./pages/Events/Hosted";
 import { useAuth0 } from "@auth0/auth0-react";
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -9,7 +10,7 @@ function App() {
   return (
     <>
       <MainNav />
-      {!isAuthenticated && <Landing />}
+      {isAuthenticated ? <Hosted /> : <Landing />}
     </>
   );
 }

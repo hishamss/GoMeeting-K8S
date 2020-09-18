@@ -17,6 +17,8 @@ const MainNav = () => {
             {user.email}
           </NavDropdown.Item>
           <NavDropdown.Divider />
+          <NavDropdown.Item>Hosted Events</NavDropdown.Item>
+          <NavDropdown.Item>Booked Events</NavDropdown.Item>
           <NavDropdown.Item href="#" role="button" onClick={() => logout()}>
             Logout
           </NavDropdown.Item>
