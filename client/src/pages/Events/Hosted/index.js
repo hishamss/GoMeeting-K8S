@@ -9,10 +9,13 @@ const Hosted = () => {
   const { user } = useAuth0();
   const [show, setShow] = useState(false);
   const [eventDate, setEventDate] = useState(new Date());
+  const [errorMessage, setErrorMessage] = useState("");
   const title = useRef("");
+
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setEventDate(new Date());
+    setErrorMessage("");
     setShow(true);
   };
   const handleSubmit = () => {
@@ -37,14 +40,20 @@ const Hosted = () => {
       createEvent(requestBody)
         .then((response) => {
           if (response.status !== 200 && response.status !== 201) {
-            throw new Error("smth went wrong!!");
+            setErrorMessage("smth went wrong!!, try Again");
+            throw new Error("smth went wrong!!, try Again");
           }
           return response.json();
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-      handleClose();
+        .then((res) => {
+          if (res) handleClose();
+        })
+        .catch((err) => {
+          console.log(err);
+          setErrorMessage("smth went wrong!!, try Again");
+        });
     }
+    setErrorMessage("Event Title is required");
   };
   return (
     <>
@@ -82,6 +91,7 @@ const Hosted = () => {
                 onChange={(date) => setEventDate(date)}
               />
             </Form.Group>
+            <p style={{ color: "red" }}>{errorMessage}</p>
           </Form>
         </Modal.Body>
         <Modal.Footer>
