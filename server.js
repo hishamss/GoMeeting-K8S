@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const PORT = 3001;
+const path = require("path");
 const mongoose = require("mongoose");
-app.use(express.urlencoded({ extended: true }));
 const { graphqlHTTP } = require("express-graphql");
 const graphQlSchema = require("./graphql/schema");
 const graphQlResolvers = require("./graphql/resolvers");
-const db = require("./models");
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(

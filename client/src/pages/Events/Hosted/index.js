@@ -2,16 +2,49 @@ import React, { useState, useRef } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { createEvent } from "../../../API";
 import "./style.css";
 const Hosted = () => {
+  const { user } = useAuth0();
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [eventDate, setEventDate] = useState(new Date());
   const title = useRef("");
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setEventDate(new Date());
+    setShow(true);
+  };
   const handleSubmit = () => {
-    console.log(title.current.value, date);
-    if (title.current.value) handleClose();
+    console.log(eventDate);
+    if (title.current.value) {
+      let formatEventDate = eventDate
+        .toString()
+        .match(/(?<=\w{3} ).+.(?= GMT)/)[0];
+      let requestBody = {
+        query: `
+      mutation {
+        createMeeting(meetingInput: {
+            name: "${title.current.value.trim()}"
+            host: "${user.email}"
+            date: "${formatEventDate}"
+        }){
+        _id
+        }
+      }
+      `,
+      };
+      createEvent(requestBody)
+        .then((response) => {
+          if (response.status !== 200 && response.status !== 201) {
+            throw new Error("smth went wrong!!");
+          }
+          return response.json();
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      handleClose();
+    }
   };
   return (
     <>
@@ -42,7 +75,12 @@ const Hosted = () => {
             </Form.Group>
             <Form.Label>Event Date</Form.Label>
             <Form.Group>
-              <DatePicker selected={date} onChange={(val) => setDate(val)} />
+              <DatePicker
+                selected={eventDate}
+                showTimeSelect
+                dateFormat="Pp"
+                onChange={(date) => setEventDate(date)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
