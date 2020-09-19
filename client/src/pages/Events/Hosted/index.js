@@ -8,7 +8,9 @@ import { GraphQlAPI } from "../../../API";
 import "./style.css";
 const Hosted = () => {
   const { user } = useAuth0();
-  const [show, setShow] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [guests, setGuests] = useState([]);
   const [eventDate, setEventDate] = useState(new Date());
   const [hostedEvents, setHostedEvents] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,6 +28,9 @@ const Hosted = () => {
         name
         host
         date
+        guests{
+          email
+        }
       }
     }
     `,
@@ -46,14 +51,27 @@ const Hosted = () => {
         console.log(err);
       });
   };
-  const handleClose = () => {
-    setShow(false);
+  const handleCloseModal1 = () => {
+    setShowModal1(false);
     getHostedEvents();
   };
-  const handleShow = () => {
+
+  const handleCloseModal2 = () => {
+    setShowModal2(false);
+  };
+  const handleShowModal1 = () => {
     setEventDate(new Date());
     setErrorMessage("");
-    setShow(true);
+    setShowModal1(true);
+  };
+
+  const handleCardClick = (guestsArr) => {
+    setGuests(guestsArr);
+    handleShowModal2();
+  };
+
+  const handleShowModal2 = () => {
+    setShowModal2(true);
   };
   const handleSubmit = () => {
     console.log(eventDate);
@@ -85,7 +103,7 @@ const Hosted = () => {
           return response.json();
         })
         .then((res) => {
-          if (res) handleClose();
+          if (res) handleCloseModal1();
         })
         .catch((err) => {
           console.log(err);
@@ -100,7 +118,7 @@ const Hosted = () => {
     <>
       <div id="hostedCont">
         <div id="hostEventDiv">
-          <Button id="hostBtn" onClick={() => handleShow()}>
+          <Button id="hostBtn" onClick={() => handleShowModal1()}>
             Host Event
           </Button>
         </div>
@@ -109,7 +127,12 @@ const Hosted = () => {
             {hostedEvents.map((row) => {
               const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
               return (
-                <Card className="eventCards" style={{ width: "20rem" }}>
+                <Card
+                  onClick={() => handleCardClick(row.guests)}
+                  className="eventCards"
+                  style={{ width: "20rem", cursor: "pointer" }}
+                  key={row._id}
+                >
                   <Card.Body>
                     <Card.Title className="cardTitle">{row.name}</Card.Title>
                     <Card.Text className="cardText">
@@ -122,7 +145,7 @@ const Hosted = () => {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showModal1} onHide={handleCloseModal1}>
         <Modal.Header closeButton>
           <Modal.Title>Host Event</Modal.Title>
         </Modal.Header>
@@ -150,7 +173,11 @@ const Hosted = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="closeModalBtn" variant="secondary" onClick={handleClose}>
+          <Button
+            id="closeModalBtn"
+            variant="secondary"
+            onClick={handleCloseModal1}
+          >
             Close
           </Button>
           <Button
@@ -159,6 +186,24 @@ const Hosted = () => {
             onClick={() => handleSubmit()}
           >
             Create
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showModal2} onHide={handleCloseModal2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Guests</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{guests.length} Guests</p>
+          <ul>
+            {guests.map((row, index) => {
+              return <li key={index}>{row.email}</li>;
+            })}
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal2}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
