@@ -5,11 +5,11 @@ module.exports = {
     try {
       var result = await db.Guests.create({
         email: args.guestInput.email,
-        meeting: "5f616aef531cf84148c8888f",
+        meeting: args.guestInput.meetingId,
       });
       try {
         let meetingResult = await db.Meetings.findOneAndUpdate(
-          { _id: "5f616aef531cf84148c8888f" },
+          { _id: args.guestInput.meetingId },
           { $push: { guests: result } }
         );
         return {

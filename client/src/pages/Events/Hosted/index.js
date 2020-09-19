@@ -52,8 +52,9 @@ const Hosted = () => {
           console.log(err);
           setErrorMessage("smth went wrong!!, try Again");
         });
+    } else {
+      setErrorMessage("Event Title is required");
     }
-    setErrorMessage("Event Title is required");
   };
   return (
     <>

@@ -2,12 +2,7 @@ import React from "react";
 import "./App.css";
 import MainNav from "./components/MainNav";
 import Landing from "./pages/Landing";
-import {
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter as Router,
-} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Hosted from "./pages/Events/Hosted";
 import Booked from "./pages/Events/Booked";
 import { useAuth0 } from "@auth0/auth0-react";

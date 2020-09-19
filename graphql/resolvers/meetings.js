@@ -24,7 +24,18 @@ module.exports = {
         };
       });
     } catch (err) {
-      console.log(err);
+      throw err;
+    }
+  },
+
+  meetingsPerUser: async (args) => {
+    try {
+      let result = await db.Meetings.find({ host: args.host });
+      console.log("meetingPerUser", result);
+      return result.map((row) => {
+        return { ...row._doc };
+      });
+    } catch (err) {
       throw err;
     }
   },
