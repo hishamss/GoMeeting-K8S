@@ -41,6 +41,17 @@
   padding: 2rem;
   margin: 1rem;
 }
+
+.cardText {
+  font-size: 0.9rem;
+  color: darkgrey;
+  font-weight: bold;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
 .react-datepicker-wrapper {
   width: 100%;
 }

@@ -109,13 +109,10 @@ const Hosted = () => {
             {hostedEvents.map((row) => {
               const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
               return (
-                // <p key={row._id}>
-                //   name: {row.name}, date:<Moment>{dateToFormat}</Moment>
-                // </p>
                 <Card className="eventCards" style={{ width: "20rem" }}>
                   <Card.Body>
-                    <Card.Title>{row.name}</Card.Title>
-                    <Card.Text>
+                    <Card.Title className="cardTitle">{row.name}</Card.Title>
+                    <Card.Text className="cardText">
                       <Moment>{dateToFormat}</Moment>
                     </Card.Text>
                   </Card.Body>
