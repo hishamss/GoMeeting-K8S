@@ -5,6 +5,7 @@ body {
 
 #root {
   height: 100%;
+  overflow: auto;
   background-color: #f2f3f3;
   font-family: "Raleway", sans-serif;
 }

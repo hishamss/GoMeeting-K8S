@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import Moment from "react-moment";
 import "react-datepicker/dist/react-datepicker.css";
@@ -109,9 +109,17 @@ const Hosted = () => {
             {hostedEvents.map((row) => {
               const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
               return (
-                <p key={row._id}>
-                  name: {row.name}, date: <Moment>{dateToFormat}</Moment>
-                </p>
+                // <p key={row._id}>
+                //   name: {row.name}, date:<Moment>{dateToFormat}</Moment>
+                // </p>
+                <Card className="eventCards" style={{ width: "20rem" }}>
+                  <Card.Body>
+                    <Card.Title>{row.name}</Card.Title>
+                    <Card.Text>
+                      <Moment>{dateToFormat}</Moment>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               );
             })}
           </div>
