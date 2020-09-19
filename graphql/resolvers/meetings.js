@@ -30,7 +30,9 @@ module.exports = {
 
   meetingsPerUser: async (args) => {
     try {
-      let result = await db.Meetings.find({ host: args.host });
+      let result = await db.Meetings.find({ host: args.host }).populate(
+        "guests"
+      );
       console.log("meetingPerUser", result);
       return result.map((row) => {
         return { ...row._doc };

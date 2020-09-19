@@ -1,4 +1,4 @@
-export const createEvent = (requestBody) => {
+export const GraphQlAPI = (requestBody) => {
   return fetch("/graphql", {
     method: "POST",
     body: JSON.stringify(requestBody),

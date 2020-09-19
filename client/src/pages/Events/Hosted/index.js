@@ -1,18 +1,55 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import Moment from "react-moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { createEvent } from "../../../API";
+import { GraphQlAPI } from "../../../API";
 import "./style.css";
 const Hosted = () => {
   const { user } = useAuth0();
   const [show, setShow] = useState(false);
   const [eventDate, setEventDate] = useState(new Date());
+  const [hostedEvents, setHostedEvents] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const title = useRef("");
+  useEffect(() => {
+    getHostedEvents();
+  }, []);
 
-  const handleClose = () => setShow(false);
+  const getHostedEvents = () => {
+    let requestBody = {
+      query: `
+    query {
+      meetingsPerUser(host: "${user.email}"){
+        _id
+        name
+        host
+        date
+      }
+    }
+    `,
+    };
+    GraphQlAPI(requestBody)
+      .then((response) => {
+        if (response.status !== 200 && response.status !== 201) {
+          throw new Error("smth went wrong with loading hosted events");
+        }
+        return response.json();
+      })
+      .then((res) => {
+        if (res) {
+          setHostedEvents(res["data"]["meetingsPerUser"]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleClose = () => {
+    setShow(false);
+    getHostedEvents();
+  };
   const handleShow = () => {
     setEventDate(new Date());
     setErrorMessage("");
@@ -24,6 +61,8 @@ const Hosted = () => {
       let formatEventDate = eventDate
         .toString()
         .match(/(?<=\w{3} ).+.(?= GMT)/)[0];
+
+      console.log(formatEventDate);
       let requestBody = {
         query: `
       mutation {
@@ -37,7 +76,7 @@ const Hosted = () => {
       }
       `,
       };
-      createEvent(requestBody)
+      GraphQlAPI(requestBody)
         .then((response) => {
           if (response.status !== 200 && response.status !== 201) {
             setErrorMessage("smth went wrong!!, try Again");
@@ -56,6 +95,7 @@ const Hosted = () => {
       setErrorMessage("Event Title is required");
     }
   };
+
   return (
     <>
       <div id="hostedCont">
@@ -65,7 +105,16 @@ const Hosted = () => {
           </Button>
         </div>
         <div id="listHostedEventsDiv">
-          <div id="hostedEvents"></div>
+          <div id="hostedEvents">
+            {hostedEvents.map((row) => {
+              const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
+              return (
+                <p key={row._id}>
+                  name: {row.name}, date: <Moment>{dateToFormat}</Moment>
+                </p>
+              );
+            })}
+          </div>
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>
