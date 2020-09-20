@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, NavDropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
@@ -17,8 +18,12 @@ const MainNav = () => {
             {user.email}
           </NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item>Hosted Events</NavDropdown.Item>
-          <NavDropdown.Item>Booked Events</NavDropdown.Item>
+          <NavDropdown.Item as={NavLink} to="/hosted" key="1">
+            Hosted Events
+          </NavDropdown.Item>
+          <NavDropdown.Item as={NavLink} to="/booked" key="2">
+            Booked Events
+          </NavDropdown.Item>
           <NavDropdown.Item href="#" role="button" onClick={() => logout()}>
             Logout
           </NavDropdown.Item>
