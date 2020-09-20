@@ -33,7 +33,6 @@ module.exports = {
       let result = await db.Meetings.find({ host: args.host }).populate(
         "guests"
       );
-      console.log("meetingPerUser", result);
       return result.map((row) => {
         return { ...row._doc };
       });
