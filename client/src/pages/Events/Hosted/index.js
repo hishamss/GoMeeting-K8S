@@ -38,13 +38,10 @@ const Hosted = () => {
     setShowModal2(true);
   };
   const handleSubmit = () => {
-    console.log(eventDate);
     if (title.current.value) {
       let formatEventDate = eventDate
         .toString()
         .match(/(?<=\w{3} ).+.(?= GMT)/)[0];
-
-      console.log(formatEventDate);
       let requestBody = {
         query: `
       mutation {
@@ -67,7 +64,16 @@ const Hosted = () => {
           return response.json();
         })
         .then((res) => {
-          if (res) handleCloseModal1();
+          if (res) {
+            //update the hosted events array when add event modal close to update the list on the page.
+            allEvents.push({
+              name: title.current.value.trim(),
+              host: user.email,
+              date: new Date(eventDate).getTime(),
+              _id: Math.random(), //temporarly add unique value to be used in card key attribute
+            });
+            handleCloseModal1();
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -80,7 +86,6 @@ const Hosted = () => {
 
   return (
     <>
-      {console.log("all Events from redux", allEvents)}
       <div id="hostedCont">
         <div id="hostEventDiv">
           <Button id="hostBtn" onClick={() => handleShowModal1()}>
