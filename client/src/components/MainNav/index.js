@@ -18,12 +18,13 @@ const MainNav = () => {
             {user.email}
           </NavDropdown.Item>
           <NavDropdown.Divider />
+          <NavDropdown.Item as={NavLink} to="/home" key="2">
+            Home
+          </NavDropdown.Item>
           <NavDropdown.Item as={NavLink} to="/hosted" key="1">
             Hosted Events
           </NavDropdown.Item>
-          <NavDropdown.Item as={NavLink} to="/booked" key="2">
-            Booked Events
-          </NavDropdown.Item>
+
           <NavDropdown.Item href="#" role="button" onClick={() => logout()}>
             Logout
           </NavDropdown.Item>

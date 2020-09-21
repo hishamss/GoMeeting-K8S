@@ -1,0 +1,11 @@
+#homeCont {
+  height: calc(100% - 52px);
+}
+
+#allEvents {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
