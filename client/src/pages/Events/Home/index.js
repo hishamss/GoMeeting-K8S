@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { GraphQlAPI } from "../../../API";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getAllEvents } from "../../../actions";
+import { useDispatch } from "react-redux";
 import Moment from "react-moment";
 import "./style.css";
 const Home = () => {
   const { user } = useAuth0();
   const [allEvents, setAllEvents] = useState([]);
   useEffect(() => {
-    getAllEvents();
+    fetchEvents();
   }, []);
-
-  const getAllEvents = () => {
+  const dispatch = useDispatch();
+  const fetchEvents = () => {
     let requestBody = {
       query: `
     query {
@@ -37,6 +39,7 @@ const Home = () => {
       .then((res) => {
         if (res) {
           setAllEvents(res["data"]["meetings"]);
+          dispatch(getAllEvents(res["data"]["meetings"]));
         }
       })
       .catch((err) => {
@@ -46,8 +49,9 @@ const Home = () => {
   return (
     <div id="homeCont">
       <div id="allEvents">
-        {allEvents.map((row) => {
-          if (row.host !== user.email || true) {
+        {allEvents
+          .filter((event) => event.host !== user.email)
+          .map((row) => {
             const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
             return (
               <Card
@@ -63,8 +67,7 @@ const Home = () => {
                 </Card.Body>
               </Card>
             );
-          }
-        })}
+          })}
       </div>
     </div>
   );

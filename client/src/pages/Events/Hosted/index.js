@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import Moment from "react-moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 import { GraphQlAPI } from "../../../API";
 import "./style.css";
 const Hosted = () => {
@@ -12,48 +13,11 @@ const Hosted = () => {
   const [showModal2, setShowModal2] = useState(false);
   const [guests, setGuests] = useState([]);
   const [eventDate, setEventDate] = useState(new Date());
-  const [hostedEvents, setHostedEvents] = useState([]);
+  const allEvents = useSelector((state) => state.eventsReducer);
   const [errorMessage, setErrorMessage] = useState("");
   const title = useRef("");
-  useEffect(() => {
-    getHostedEvents();
-  }, []);
-
-  const getHostedEvents = () => {
-    let requestBody = {
-      query: `
-    query {
-      meetingsPerUser(host: "${user.email}"){
-        _id
-        name
-        host
-        date
-        guests{
-          email
-        }
-      }
-    }
-    `,
-    };
-    GraphQlAPI(requestBody)
-      .then((response) => {
-        if (response.status !== 200 && response.status !== 201) {
-          throw new Error("smth went wrong with loading hosted events");
-        }
-        return response.json();
-      })
-      .then((res) => {
-        if (res) {
-          setHostedEvents(res["data"]["meetingsPerUser"]);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const handleCloseModal1 = () => {
     setShowModal1(false);
-    getHostedEvents();
   };
 
   const handleCloseModal2 = () => {
@@ -116,6 +80,7 @@ const Hosted = () => {
 
   return (
     <>
+      {console.log("all Events from redux", allEvents)}
       <div id="hostedCont">
         <div id="hostEventDiv">
           <Button id="hostBtn" onClick={() => handleShowModal1()}>
@@ -124,24 +89,26 @@ const Hosted = () => {
         </div>
         <div id="listHostedEventsDiv">
           <div id="hostedEvents">
-            {hostedEvents.map((row) => {
-              const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
-              return (
-                <Card
-                  onClick={() => handleCardClick(row.guests)}
-                  className="eventCards"
-                  style={{ width: "20rem", cursor: "pointer" }}
-                  key={row._id}
-                >
-                  <Card.Body>
-                    <Card.Title className="cardTitle">{row.name}</Card.Title>
-                    <Card.Text className="cardText">
-                      <Moment>{dateToFormat}</Moment>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              );
-            })}
+            {allEvents
+              .filter((event) => event.host === user.email)
+              .map((row) => {
+                const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
+                return (
+                  <Card
+                    onClick={() => handleCardClick(row.guests)}
+                    className="eventCards"
+                    style={{ width: "20rem", cursor: "pointer" }}
+                    key={row._id}
+                  >
+                    <Card.Body>
+                      <Card.Title className="cardTitle">{row.name}</Card.Title>
+                      <Card.Text className="cardText">
+                        <Moment>{dateToFormat}</Moment>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ function App() {
         {isAuthenticated && <Route exact path="/home" component={Home} />}
         {!isAuthenticated && <Route exact path="/login" component={Landing} />}
         {isAuthenticated && <Route exact path="/hosted" component={Hosted} />}
-        {isAuthenticated && <Route path="/" component={Hosted} />}
+        {isAuthenticated && <Route path="/" component={Home} />}
       </Switch>
     </>
   );
