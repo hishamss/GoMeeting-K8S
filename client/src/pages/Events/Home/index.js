@@ -47,7 +47,8 @@ const Home = () => {
       });
   };
   return (
-    <div id="homeCont">
+    <div id="homeCont" className="text-center">
+      <h1 style={{ margin: "1rem" }}>Available Events</h1>
       <div id="allEvents">
         {allEvents
           .filter((event) => event.host !== user.email)
