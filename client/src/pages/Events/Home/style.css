@@ -9,3 +9,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.bookEvent {
+  background-color: #e83151;
+  border-color: #e83151;
+  font-size: 1.2rem;
+}
