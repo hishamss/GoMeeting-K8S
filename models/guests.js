@@ -11,5 +11,7 @@ const guestSchema = new Schema({
     ref: "meetings",
   },
 });
+// unique compund index to make sure email and meetingID combination is unique
+guestSchema.index({ email: 1, meeting: 1 }, { unique: true });
 // Export the model to app.js
 module.exports = mongoose.model("guests", guestSchema);

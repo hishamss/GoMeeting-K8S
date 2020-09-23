@@ -9,6 +9,7 @@ import "./style.css";
 const Home = () => {
   const { user } = useAuth0();
   const [allEvents, setAllEvents] = useState([]);
+  const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
   useEffect(() => {
     fetchEvents();
@@ -49,7 +50,6 @@ const Home = () => {
   };
 
   const handleBooking = (meetingId) => {
-    console.log("bookcing clicked", meetingId, user.email);
     let requestBody = {
       query: `
     mutation {
@@ -72,6 +72,9 @@ const Home = () => {
       })
       .then((res) => {
         if (res) {
+          if ("errors" in res) setMessage("You Already booked this Event!!");
+          // this will return duplicate error
+          else setMessage("The Event has been added to your list");
           setShow(true);
         }
       })
@@ -120,7 +123,7 @@ const Home = () => {
           <Modal.Title>Event Added</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <h1>The Event has been added to your list</h1>
+          <h4>{message}</h4>
         </Modal.Body>
         <Modal.Footer>
           <Button
