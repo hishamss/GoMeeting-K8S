@@ -65,14 +65,19 @@ const Hosted = () => {
         })
         .then((res) => {
           if (res) {
-            //update the hosted events array when add event modal close to update the list on the page.
-            allEvents.push({
-              name: title.current.value.trim(),
-              host: user.email,
-              date: new Date(eventDate).getTime(),
-              _id: Math.random(), //temporarly add unique value to be used in card key attribute
-            });
-            handleCloseModal1();
+            console.log("adding Event", res);
+            if ("errors" in res)
+              setErrorMessage("You already hosting an Event on this date&time");
+            else {
+              //update the hosted events array when add event modal close to update the list on the page.
+              allEvents.push({
+                name: title.current.value.trim(),
+                host: user.email,
+                date: new Date(eventDate).getTime(),
+                _id: Math.random(), //temporarly add unique value to be used in card key attribute
+              });
+              handleCloseModal1();
+            }
           }
         })
         .catch((err) => {
@@ -130,6 +135,7 @@ const Hosted = () => {
                 type="text"
                 name="title"
                 placeholder="Event Title"
+                autoComplete="off"
               />
             </Form.Group>
             <Form.Label>Event Date</Form.Label>
