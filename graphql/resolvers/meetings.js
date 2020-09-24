@@ -27,17 +27,4 @@ module.exports = {
       throw err;
     }
   },
-
-  meetingsPerUser: async (args) => {
-    try {
-      let result = await db.Meetings.find({ host: args.host }).populate(
-        "guests"
-      );
-      return result.map((row) => {
-        return { ...row._doc };
-      });
-    } catch (err) {
-      throw err;
-    }
-  },
 };

@@ -8,7 +8,7 @@ const MainNav = () => {
   const { logout, isAuthenticated, user } = useAuth0();
   return (
     <Navbar id="nav_container" bg="light" expand="lg">
-      <Navbar.Brand href="#home">
+      <Navbar.Brand>
         <img id="logo_img" alt="Logo" src="goMeeting.png" />
       </Navbar.Brand>
       {/* ml-auto to align Nav to the right */}

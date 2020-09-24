@@ -31,7 +31,7 @@ input MeetingInput {
 type RootQuery {
     guests: [Guest!]!
     meetings: [Meeting!]!
-    meetingsPerUser(host: String!): [Meeting!]!
+    
 }
 
 type RootMutation {
