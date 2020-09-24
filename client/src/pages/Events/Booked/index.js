@@ -6,6 +6,7 @@ import Moment from "react-moment";
 const Booked = () => {
   const { user } = useAuth0();
   const [bookedEvents, setBookedEvents] = useState([]);
+  let eventDates = [];
   useEffect(() => {
     fetchBookedEvents();
   }, []);
@@ -31,7 +32,6 @@ const Booked = () => {
         return response.json();
       })
       .then((res) => {
-        console.log("booked Events", res["data"]["guests"]);
         setBookedEvents(res["data"]["guests"]);
       })
       .catch((err) => {
@@ -42,15 +42,34 @@ const Booked = () => {
     <div id="bookedCont" className="text-center">
       <h1 style={{ margin: "1rem" }}>Booked Events</h1>
       <div id="bookedEvents">
-        {bookedEvents.map((row) => {
-          console.log(row["meeting"]);
-          const dateToFormat = new Date(+row["meeting"].date);
-          return (
-            <p key={row["meeting"]._id}>
-              Name:{row["meeting"].name}, date: <Moment>{dateToFormat}</Moment>
-            </p>
-          );
-        })}
+        {
+          (eventDates =
+            [] &&
+            bookedEvents.map((row) => {
+              const dateToFormat = new Date(+row["meeting"].date);
+              const eventDate = (dateToFormat + "").substring(0, 15);
+              const eventTime = (dateToFormat + "").substring(15);
+              if (!eventDates.includes(eventDate)) {
+                eventDates.push(eventDate);
+                return (
+                  <>
+                    <hr />
+                    <h4>{eventDate}</h4>
+                    <p key={row["meeting"]._id}>
+                      Name:{row["meeting"].name}, time:
+                      {eventTime.substring(0, 8)} MST
+                    </p>
+                  </>
+                );
+              }
+              return (
+                <p key={row["meeting"]._id}>
+                  Name:{row["meeting"].name}, time:
+                  {eventTime.substring(0, 8)} MST
+                </p>
+              );
+            }))
+        }
       </div>
     </div>
   );

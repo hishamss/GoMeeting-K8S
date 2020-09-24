@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Modal, Form, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import Moment from "react-moment";
