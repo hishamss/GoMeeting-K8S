@@ -7,6 +7,7 @@ const Booked = () => {
   const { user } = useAuth0();
   const [bookedEvents, setBookedEvents] = useState([]);
   let eventDates = [];
+  let addLine = false;
   useEffect(() => {
     fetchBookedEvents();
   }, []);
@@ -53,11 +54,16 @@ const Booked = () => {
                 eventDates.push(eventDate);
                 return (
                   <>
-                    <hr />
+                    <hr
+                      style={
+                        addLine ? { display: "auto" } : { display: "none" }
+                      }
+                    />
+                    {(addLine = true)}
                     <h4>{eventDate}</h4>
                     <p key={row["meeting"]._id}>
                       Name:{row["meeting"].name}, time:
-                      {eventTime.substring(0, 8)} MST
+                      {eventTime.substring(1, 9)} MST
                     </p>
                   </>
                 );
@@ -65,7 +71,7 @@ const Booked = () => {
               return (
                 <p key={row["meeting"]._id}>
                   Name:{row["meeting"].name}, time:
-                  {eventTime.substring(0, 8)} MST
+                  {eventTime.substring(1, 9)} MST
                 </p>
               );
             }))
