@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
-import { GraphQlAPI } from "../../../API";
+import { GraphQlAPI } from "../../API";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getAllEvents } from "../../../actions";
+import { getAllEvents } from "../../actions";
 import { useDispatch } from "react-redux";
 import Moment from "react-moment";
 import "./style.css";

@@ -4,7 +4,7 @@ import MainNav from "./components/MainNav";
 import Landing from "./pages/Landing";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Hosted from "./pages/Events/Hosted";
-import Home from "./pages/Events/Home";
+import Home from "./pages/Home";
 import { useAuth0 } from "@auth0/auth0-react";
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
