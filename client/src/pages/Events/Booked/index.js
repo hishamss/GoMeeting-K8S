@@ -6,8 +6,8 @@ import Moment from "react-moment";
 const Booked = () => {
   const { user } = useAuth0();
   const [bookedEvents, setBookedEvents] = useState([]);
-  let eventDates = [];
-  let addLine = false;
+  let eventDates = []; //array to group the events based on the dates
+  let addLine = false; //add <hr> after the first group"
   useEffect(() => {
     fetchBookedEvents();
   }, []);
@@ -42,7 +42,7 @@ const Booked = () => {
   return (
     <div id="bookedCont" className="text-center">
       <h1 style={{ margin: "1rem" }}>Booked Events</h1>
-      <div id="bookedEvents">
+      <div id="bookedEvents" className="text-left">
         {
           (eventDates =
             [] &&
@@ -61,18 +61,19 @@ const Booked = () => {
                     />
                     {(addLine = true)}
                     <h4>{eventDate}</h4>
-                    <p key={row["meeting"]._id}>
-                      Name:{row["meeting"].name}, time:
-                      {eventTime.substring(1, 9)} MST
-                    </p>
+
+                    <div key={row["meeting"]._id}>
+                      <h5>{row["meeting"].name}</h5>
+                      <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
+                    </div>
                   </>
                 );
               }
               return (
-                <p key={row["meeting"]._id}>
-                  Name:{row["meeting"].name}, time:
-                  {eventTime.substring(1, 9)} MST
-                </p>
+                <div key={row["meeting"]._id}>
+                  <h5>{row["meeting"].name}</h5>
+                  <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
+                </div>
               );
             }))
         }
