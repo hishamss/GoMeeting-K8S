@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button, Modal, Form, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import Moment from "react-moment";
+import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
@@ -139,11 +140,13 @@ const Hosted = () => {
               />
             </Form.Group>
             <Form.Label>Event Date</Form.Label>
+
             <Form.Group>
               <DatePicker
                 selected={eventDate}
                 showTimeSelect
                 dateFormat="Pp"
+                minDate={moment().toDate()}
                 onChange={(date) => setEventDate(date)}
               />
             </Form.Group>
