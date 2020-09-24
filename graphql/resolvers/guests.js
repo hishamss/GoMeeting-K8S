@@ -24,9 +24,11 @@ module.exports = {
       throw err;
     }
   },
-  guests: async () => {
+  guests: async (args) => {
     try {
-      let result = await db.Guests.find().populate("meeting");
+      let result = await db.Guests.find({ email: args.email }).populate(
+        "meeting"
+      );
       return result.map((row) => {
         return {
           ...row._doc,

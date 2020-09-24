@@ -29,9 +29,8 @@ input MeetingInput {
 
 
 type RootQuery {
-    guests: [Guest!]!
-    meetings: [Meeting!]!
-    
+    guests(email: String!): [Guest!]!
+    meetings: [Meeting!]!  
 }
 
 type RootMutation {
