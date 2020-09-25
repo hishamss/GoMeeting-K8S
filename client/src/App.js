@@ -14,7 +14,7 @@ function App() {
       <div id="loadingCont">
         <div id="loadingDiv">
           <img
-            style={{ width: "10%" }}
+            style={{ width: "5%" }}
             src="loading.gif"
             alt="loading_img"
           ></img>

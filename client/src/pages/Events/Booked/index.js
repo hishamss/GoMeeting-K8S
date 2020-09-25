@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
+import { Button } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { GraphQlAPI } from "../../../API";
-import Moment from "react-moment";
 const Booked = () => {
   const { user } = useAuth0();
   const [bookedEvents, setBookedEvents] = useState([]);
@@ -39,6 +39,35 @@ const Booked = () => {
         console.log(err);
       });
   };
+  const cancelEvent = (bookingId) => {
+    console.log(`Booking Id ${bookingId}`);
+    let requestBody = {
+      query: `
+          mutation {
+            deleteGuest(meetingId: "${bookingId}", email: "${user.email}"){
+                deletedCount
+            }
+          }
+          `,
+    };
+    GraphQlAPI(requestBody)
+      .then((response) => {
+        if (response.status !== 200 && response.status !== 201) {
+          throw new Error("smth went wrong!!, try Again");
+        }
+        return response.json();
+      })
+      .then((res) => {
+        console.log("deleted", res["data"]["deleteGuest"]["deletedCount"]);
+        if (res["data"]["deleteGuest"]["deletedCount"] === 1) {
+          document.getElementById(bookingId).style.opacity = "0.2";
+          document.getElementById(bookingId).style.pointerEvents = "none";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div id="bookedCont" className="text-center">
       <h1 style={{ margin: "1rem" }}>Booked Events</h1>
@@ -62,21 +91,33 @@ const Booked = () => {
                     {(addLine = true)}
                     <h4>{eventDate}</h4>
 
-                    <div key={row["meeting"]._id}>
-                      <h5>
+                    <div key={row["meeting"]._id} id={row["meeting"]._id}>
+                      <h5 style={{ display: "inline" }}>
                         <strong>{row["meeting"].name}</strong>
                       </h5>
-                      <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
+                      <Button
+                        className="cancelEvent"
+                        onClick={() => cancelEvent(row["meeting"]._id)}
+                      >
+                        Cancel
+                      </Button>
+                      <p className="eventDate">{eventTime}</p>
                     </div>
                   </>
                 );
               }
               return (
-                <div key={row["meeting"]._id}>
-                  <h5>
+                <div key={row["meeting"]._id} id={row["meeting"]._id}>
+                  <h5 style={{ display: "inline" }}>
                     <strong>{row["meeting"].name}</strong>
                   </h5>
-                  <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
+                  <Button
+                    className="cancelEvent"
+                    onClick={() => cancelEvent(row["meeting"]._id)}
+                  >
+                    Cancel
+                  </Button>
+                  <p className="eventDate">{eventTime}</p>
                 </div>
               );
             }))

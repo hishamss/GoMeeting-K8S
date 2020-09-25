@@ -39,4 +39,19 @@ module.exports = {
       throw err;
     }
   },
+
+  deleteGuest: async (args) => {
+    try {
+      let result = await db.Guests.deleteOne({
+        email: args.email,
+        meeting: args.meetingId,
+      });
+      console.log("deleteGuest", result);
+      return {
+        ...result,
+      };
+    } catch (err) {
+      throw err;
+    }
+  },
 };
