@@ -9,7 +9,18 @@ import Booked from "./pages/Events/Booked";
 import { useAuth0 } from "@auth0/auth0-react";
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading)
+    return (
+      <div id="loadingCont">
+        <div id="loadingDiv">
+          <img
+            style={{ width: "10%" }}
+            src="loading.gif"
+            alt="loading_img"
+          ></img>
+        </div>
+      </div>
+    );
   return (
     <>
       <MainNav />

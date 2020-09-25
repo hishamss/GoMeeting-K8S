@@ -63,7 +63,9 @@ const Booked = () => {
                     <h4>{eventDate}</h4>
 
                     <div key={row["meeting"]._id}>
-                      <h5>{row["meeting"].name}</h5>
+                      <h5>
+                        <strong>{row["meeting"].name}</strong>
+                      </h5>
                       <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
                     </div>
                   </>
@@ -71,7 +73,9 @@ const Booked = () => {
               }
               return (
                 <div key={row["meeting"]._id}>
-                  <h5>{row["meeting"].name}</h5>
+                  <h5>
+                    <strong>{row["meeting"].name}</strong>
+                  </h5>
                   <p class="eventDate">{eventTime.substring(1, 9)} MST</p>
                 </div>
               );
