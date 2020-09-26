@@ -72,7 +72,9 @@ const Booked = () => {
     <div id="bookedCont" className="text-center">
       <h1 style={{ margin: "1rem" }}>Booked Events</h1>
       <div id="bookedEvents" className="text-left">
-        {
+        {bookedEvents.length === 0 ? (
+          <h3>No Booked Events !</h3>
+        ) : (
           (eventDates =
             [] &&
             bookedEvents.map((row) => {
@@ -121,7 +123,7 @@ const Booked = () => {
                 </div>
               );
             }))
-        }
+        )}
       </div>
     </div>
   );

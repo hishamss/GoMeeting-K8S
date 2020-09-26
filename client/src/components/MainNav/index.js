@@ -7,7 +7,7 @@ import "./style.css";
 const MainNav = () => {
   const { logout, isAuthenticated, user } = useAuth0();
   return (
-    <Navbar id="nav_container" bg="light" expand="lg">
+    <Navbar className="sticky-top" id="nav_container" bg="light" expand="lg">
       <Navbar.Brand>
         <img id="logo_img" alt="Logo" src="goMeeting.png" />
       </Navbar.Brand>
