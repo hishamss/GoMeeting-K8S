@@ -91,6 +91,31 @@ const Hosted = () => {
 
   const cancelEvent = (EventId) => {
     console.log("event to cancel", EventId);
+    let requestBody = {
+      query: `
+    mutation {
+      deleteMeeting(meetingId: "${EventId}"){
+        deletedCount
+      }
+    }
+    `,
+    };
+    GraphQlAPI(requestBody)
+      .then((response) => {
+        if (response.status !== 200 && response.status !== 201) {
+          throw new Error("smth went wrong!!, try Again");
+        }
+        return response.json();
+      })
+      .then((res) => {
+        if (res["data"]["deleteMeeting"]["deletedCount"] === 1) {
+          document.getElementById(EventId).style.opacity = "0.3";
+          document.getElementById(EventId).style.pointerEvents = "none";
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   return (
@@ -112,6 +137,7 @@ const Hosted = () => {
                     className="eventCards"
                     style={{ width: "20rem" }}
                     key={row._id}
+                    id={row._id}
                   >
                     <Card.Body>
                       <Card.Title className="cardTitle">{row.name}</Card.Title>
