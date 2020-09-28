@@ -66,7 +66,6 @@ const Hosted = () => {
         })
         .then((res) => {
           if (res) {
-            console.log("adding Event", res);
             if ("errors" in res)
               setErrorMessage("You already hosting an Event on this date&time");
             else {
@@ -75,7 +74,7 @@ const Hosted = () => {
                 name: title.current.value.trim(),
                 host: user.email,
                 date: new Date(eventDate).getTime(),
-                _id: Math.random(), //temporarly add unique value to be used in card key attribute
+                _id: res["data"]["createMeeting"]["_id"],
               });
               handleCloseModal1();
             }
@@ -88,6 +87,10 @@ const Hosted = () => {
     } else {
       setErrorMessage("Event Title is required");
     }
+  };
+
+  const cancelEvent = (EventId) => {
+    console.log("event to cancel", EventId);
   };
 
   return (
@@ -106,15 +109,30 @@ const Hosted = () => {
                 const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
                 return (
                   <Card
-                    onClick={() => handleCardClick(row.guests)}
                     className="eventCards"
-                    style={{ width: "20rem", cursor: "pointer" }}
+                    style={{ width: "20rem" }}
                     key={row._id}
                   >
                     <Card.Body>
                       <Card.Title className="cardTitle">{row.name}</Card.Title>
                       <Card.Text className="cardText">
                         <Moment>{dateToFormat}</Moment>
+                        <br />
+                        <br />
+                        <Button
+                          className="HostedEventBtn"
+                          onClick={() => handleCardClick(row.guests)}
+                        >
+                          Show Guests
+                        </Button>
+
+                        <Button
+                          className="HostedEventBtn"
+                          onClick={() => cancelEvent(row._id)}
+                          style={{ marginLeft: "0.5rem" }}
+                        >
+                          Cancel
+                        </Button>
                       </Card.Text>
                     </Card.Body>
                   </Card>

@@ -62,3 +62,18 @@
   border-radius: 0.25rem;
   padding: 6px 12px;
 }
+
+.HostedEventBtn {
+  background-color: #e83151;
+  border-color: #e83151;
+  font-size: 0.7rem;
+}
+
+.HostedEventBtn:hover,
+.HostedEventBtn:active,
+.HostedEventBtn:focus {
+  background-color: #e83151;
+  border-color: #e83151;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
