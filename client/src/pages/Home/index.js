@@ -89,10 +89,14 @@ const Home = () => {
   return (
     <>
       <div id="homeCont" className="text-center">
-        <h1 style={{ margin: "1rem" }}>Available Events</h1>
+        <h1 style={{ margin: "1rem" }}>Upcoming Events</h1>
         <div id="allEvents">
           {allEvents
-            .filter((event) => event.host !== user.email)
+            .filter(
+              (event) =>
+                new Date(+event.date).getTime() >= new Date().getTime() &&
+                event.host !== user.email
+            )
             .map((row) => {
               const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
               return (
