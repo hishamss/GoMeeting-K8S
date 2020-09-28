@@ -135,7 +135,11 @@ const Hosted = () => {
                 return (
                   <Card
                     className="eventCards"
-                    style={{ width: "20rem" }}
+                    style={
+                      dateToFormat.getTime() < new Date().getTime()
+                        ? { opacity: "0.3", pointerEvents: "none" }
+                        : { opacity: "1", pointerEvents: "auto" }
+                    }
                     key={row._id}
                     id={row._id}
                   >
