@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { Button, Modal, Form, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import Moment from "react-moment";
-import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
@@ -14,6 +13,7 @@ const Hosted = () => {
   const [showModal2, setShowModal2] = useState(false);
   const [guests, setGuests] = useState([]);
   const [eventDate, setEventDate] = useState(new Date());
+  const endDate = new Date(new Date().setDate(new Date().getDate() + 14));
   const allEvents = useSelector((state) => state.eventsReducer);
   const [errorMessage, setErrorMessage] = useState("");
   const title = useRef("");
@@ -190,11 +190,15 @@ const Hosted = () => {
                 selected={eventDate}
                 showTimeSelect
                 dateFormat="Pp"
-                minDate={moment().toDate()}
+                minDate={new Date()}
+                maxDate={endDate}
                 onChange={(date) => setEventDate(date)}
               />
             </Form.Group>
             <p style={{ color: "red" }}>{errorMessage}</p>
+            <p style={{ color: "grey", fontSize: ".7rem" }}>
+              Hint: maximum event date is 14 days ahead
+            </p>
           </Form>
         </Modal.Body>
         <Modal.Footer>
