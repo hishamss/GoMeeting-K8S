@@ -9,6 +9,14 @@ import "./style.css";
 const Home = () => {
   const { user } = useAuth0();
   const [allEvents, setAllEvents] = useState([]);
+  let filteredEvents =
+    allEvents.length === 0
+      ? []
+      : allEvents.filter(
+          (event) =>
+            new Date(+event.date).getTime() >= new Date().getTime() &&
+            event.host !== user.email
+        );
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -18,18 +26,18 @@ const Home = () => {
   const fetchEvents = () => {
     let requestBody = {
       query: `
-    query {
-      meetings{
-        _id
-        name
-        host
-        date
-        guests{
-          email
+      query {
+        meetings{
+          _id
+          name
+          host
+          date
+          guests{
+            email
+          }
         }
       }
-    }
-    `,
+      `,
     };
     GraphQlAPI(requestBody)
       .then((response) => {
@@ -91,13 +99,10 @@ const Home = () => {
       <div id="homeCont" className="text-center">
         <h1 style={{ margin: "1rem" }}>Upcoming Events</h1>
         <div id="allEvents">
-          {allEvents
-            .filter(
-              (event) =>
-                new Date(+event.date).getTime() >= new Date().getTime() &&
-                event.host !== user.email
-            )
-            .map((row) => {
+          {filteredEvents.length === 0 ? (
+            <h3>No Events</h3>
+          ) : (
+            filteredEvents.map((row) => {
               const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
               return (
                 <Card
@@ -119,7 +124,8 @@ const Home = () => {
                   </Card.Body>
                 </Card>
               );
-            })}
+            })
+          )}
         </div>
       </div>
       <Modal show={show} onHide={handleCloseModal}>
