@@ -5,7 +5,7 @@
 #hostEventDiv {
   margin: 1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 #hostBtn,
@@ -77,4 +77,9 @@
   border-color: #e83151;
   font-size: 0.7rem;
   font-weight: bold;
+}
+
+.hostEventInnerDivs {
+  width: 30%;
+  margin: 1rem;
 }

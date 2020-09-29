@@ -122,52 +122,65 @@ const Hosted = () => {
     <>
       <div id="hostedCont">
         <div id="hostEventDiv">
-          <Button id="hostBtn" onClick={() => handleShowModal1()}>
-            Host Event
-          </Button>
+          <div className="hostEventInnerDivs"></div>
+          <div className="hostEventInnerDivs text-center">
+            <h1>Your Hosted Events</h1>
+          </div>
+          <div className="hostEventInnerDivs text-right">
+            <Button id="hostBtn" onClick={() => handleShowModal1()}>
+              Host Event
+            </Button>
+          </div>
         </div>
         <div id="listHostedEventsDiv">
           <div id="hostedEvents">
-            {allEvents
-              .filter((event) => event.host === user.email)
-              .map((row) => {
-                const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
-                return (
-                  <Card
-                    className="eventCards"
-                    style={
-                      dateToFormat.getTime() < new Date().getTime()
-                        ? { opacity: "0.3", pointerEvents: "none" }
-                        : { opacity: "1", pointerEvents: "auto" }
-                    }
-                    key={row._id}
-                    id={row._id}
-                  >
-                    <Card.Body>
-                      <Card.Title className="cardTitle">{row.name}</Card.Title>
-                      <Card.Text className="cardText">
-                        <Moment>{dateToFormat}</Moment>
-                        <br />
-                        <br />
-                        <Button
-                          className="HostedEventBtn"
-                          onClick={() => handleCardClick(row.guests)}
-                        >
-                          Show Guests
-                        </Button>
+            {allEvents.filter((event) => event.host === user.email).length ===
+            0 ? (
+              <h3>No Hosted Events!!</h3>
+            ) : (
+              allEvents
+                .filter((event) => event.host === user.email)
+                .map((row) => {
+                  const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
+                  return (
+                    <Card
+                      className="eventCards"
+                      style={
+                        dateToFormat.getTime() < new Date().getTime()
+                          ? { opacity: "0.3", pointerEvents: "none" }
+                          : { opacity: "1", pointerEvents: "auto" }
+                      }
+                      key={row._id}
+                      id={row._id}
+                    >
+                      <Card.Body>
+                        <Card.Title className="cardTitle">
+                          {row.name}
+                        </Card.Title>
+                        <Card.Text className="cardText">
+                          <Moment>{dateToFormat}</Moment>
+                          <br />
+                          <br />
+                          <Button
+                            className="HostedEventBtn"
+                            onClick={() => handleCardClick(row.guests)}
+                          >
+                            Show Guests
+                          </Button>
 
-                        <Button
-                          className="HostedEventBtn"
-                          onClick={() => cancelEvent(row._id)}
-                          style={{ marginLeft: "0.5rem" }}
-                        >
-                          Cancel
-                        </Button>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
+                          <Button
+                            className="HostedEventBtn"
+                            onClick={() => cancelEvent(row._id)}
+                            style={{ marginLeft: "0.5rem" }}
+                          >
+                            Cancel
+                          </Button>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  );
+                })
+            )}
           </div>
         </div>
       </div>
