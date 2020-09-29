@@ -71,60 +71,62 @@ const Booked = () => {
   return (
     <div id="bookedCont" className="text-center">
       <h1 style={{ margin: "1rem" }}>Booked Events</h1>
-      <div id="bookedEvents" className="text-left">
-        {bookedEvents.length === 0 ? (
-          <h3>No Booked Events !</h3>
-        ) : (
-          (eventDates =
-            [] &&
-            bookedEvents.map((row) => {
-              const dateToFormat = new Date(+row["meeting"].date);
-              const eventDate = (dateToFormat + "").substring(0, 15);
-              const eventTime = (dateToFormat + "").substring(15);
-              if (!eventDates.includes(eventDate)) {
-                eventDates.push(eventDate);
-                return (
-                  <>
-                    <hr
-                      style={
-                        addLine ? { display: "auto" } : { display: "none" }
-                      }
-                    />
-                    {(addLine = true)}
-                    <h4>{eventDate}</h4>
+      {bookedEvents.length === 0 ? (
+        <h3>No Booked Events !</h3>
+      ) : (
+        <div id="bookedEvents" className="text-left">
+          {
+            (eventDates =
+              [] &&
+              bookedEvents.map((row) => {
+                const dateToFormat = new Date(+row["meeting"].date);
+                const eventDate = (dateToFormat + "").substring(0, 15);
+                const eventTime = (dateToFormat + "").substring(15);
+                if (!eventDates.includes(eventDate)) {
+                  eventDates.push(eventDate);
+                  return (
+                    <>
+                      <hr
+                        style={
+                          addLine ? { display: "auto" } : { display: "none" }
+                        }
+                      />
+                      {(addLine = true)}
+                      <h4>{eventDate}</h4>
 
-                    <div key={row["meeting"]._id} id={row["meeting"]._id}>
-                      <h5 style={{ display: "inline" }}>
-                        <strong>{row["meeting"].name}</strong>
-                      </h5>
-                      <Button
-                        className="cancelEvent"
-                        onClick={() => cancelEvent(row["meeting"]._id)}
-                      >
-                        Cancel
-                      </Button>
-                      <p className="eventDate">{eventTime}</p>
-                    </div>
-                  </>
+                      <div key={row["meeting"]._id} id={row["meeting"]._id}>
+                        <h5 style={{ display: "inline" }}>
+                          <strong>{row["meeting"].name}</strong>
+                        </h5>
+                        <Button
+                          className="cancelEvent"
+                          onClick={() => cancelEvent(row["meeting"]._id)}
+                        >
+                          Cancel
+                        </Button>
+                        <p className="eventDate">{eventTime}</p>
+                      </div>
+                    </>
+                  );
+                }
+                return (
+                  <div key={row["meeting"]._id} id={row["meeting"]._id}>
+                    <h5 style={{ display: "inline" }}>
+                      <strong>{row["meeting"].name}</strong>
+                    </h5>
+                    <Button
+                      className="cancelEvent"
+                      onClick={() => cancelEvent(row["meeting"]._id)}
+                    >
+                      Cancel
+                    </Button>
+                    <p className="eventDate">{eventTime}</p>
+                  </div>
                 );
-              }
-              return (
-                <div key={row["meeting"]._id} id={row["meeting"]._id}>
-                  <h5 style={{ display: "inline" }}>
-                    <strong>{row["meeting"].name}</strong>
-                  </h5>
-                  <Button
-                    className="cancelEvent"
-                    onClick={() => cancelEvent(row["meeting"]._id)}
-                  >
-                    Cancel
-                  </Button>
-                  <p className="eventDate">{eventTime}</p>
-                </div>
-              );
-            }))
-        )}
-      </div>
+              }))
+          }
+        </div>
+      )}
     </div>
   );
 };
