@@ -37,8 +37,6 @@ Go Meeting: Web app built using Express js and React Platform. It's used to orga
 
 <h2>Video Demo</h2>
 
-<video width="320" height="240" controls>
-  <source src="Readme/GoMeeting.mp4" type="video/mp4">
-</video>
+<video src="Readme/GoMeeting.mp4" width="320" height="200" controls preload></video>
 
 <hr>
