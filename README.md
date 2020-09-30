@@ -37,6 +37,91 @@ Go Meeting: Web app built using Express js and React Platform. It's used to orga
 
 <h2>Video Demo</h2>
 
-<video src="Readme/GoMeeting.mp4" width="320" height="200" controls preload></video>
+!["Video"](Readme/GoMeeting.gif)
 
 <hr>
+
+<h2>Technology Used</h2>
+
+<hr>
+
+<table>
+<tr>
+<th>Technology</th>
+
+<th>Link</th>
+
+</tr>
+<tr>
+<td>React</td>
+<td>https://reactjs.org/</td>
+</tr>
+<tr>
+<td>Redux</td>
+<td>https://redux.js.org/</td>
+</tr>
+<tr>
+<td>React Bootstrap</td>
+<td>https://react-bootstrap.github.io/</td>
+</tr>
+<tr>
+<td>Auth0</td>
+<td>https://auth0.com/</td>
+</tr>
+<tr>
+<td>GraphQL</td>
+<td>https://graphql.org/</td>
+</tr>
+<tr>
+<tr>
+<td>NodeJS</td>
+<td>https://nodejs.org/en/</td>
+</tr>
+<tr>
+<td>ExpressJS</td>
+<td>https://expressjs.com/</td>
+</tr>
+<tr>
+<td>Javascript</td>
+<td></td>
+</tr>
+<tr>
+<td>CSS3</td>
+<td></td>
+</tr>
+<tr>
+<td>Bootstrap</td>
+<td>https://getbootstrap.com/</td>
+</tr>
+<tr>
+<td>Google Fonts</td>
+<td>https://fonts.google.com/</td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td>https://github.com/</td>
+</tr>
+<tr>
+<td>Heroku</td>
+<td>https://www.heroku.com/</td>
+</tr>
+<tr>
+<td>Node Package Manager(NPM)</td>
+<td>https://www.npmjs.com/</td>
+</tr>
+</table>
+<hr>
+
+<h2>Learning Points</h2>
+
+- Using Auth0 API to add authentication service to my app
+- Using GraphQL query language API to increase the performance and speed compared to Rest API
+- Using Redux Library to manage the application states.
+<hr>
+
+<h2>Author</h2>
+<hr>
+
+- <a href="http://portfolio.hishamsaymeh.com">Portfolio</a>
+- <a href="https://www.linkedin.com/in/hisham-saymeh">LinkedIn</a>
+- <a href="https://github.com/hishamss">GitHub</a>
