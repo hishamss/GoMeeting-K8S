@@ -23,7 +23,6 @@ function App() {
     );
   return (
     <>
-      {console.log("process.env", process.env)}
       <MainNav />
       <Switch>
         {isAuthenticated ? (
