@@ -23,8 +23,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/go_meetings";
 mongoose
-  .connect("mongodb://localhost/go_meetings", {
+  .connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
