@@ -43,8 +43,6 @@ Go Meeting: Web app built using Express js and React Platform. It's used to orga
 
 <h2>Technology Used</h2>
 
-<hr>
-
 <table>
 <tr>
 <th>Technology</th>
