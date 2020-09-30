@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import Moment from "react-moment";
 import "./style.css";
 const Home = () => {
+  let eventDates = []; //array to group the events based on the dates
+  let addLine = false; //add <hr> after the first group"
   const { user } = useAuth0();
   const [allEvents, setAllEvents] = useState([]);
   let filteredEvents =
@@ -98,35 +100,69 @@ const Home = () => {
     <>
       <div id="homeCont" className="text-center">
         <h1 style={{ margin: "1rem" }}>Upcoming Events</h1>
-        <div id="allEvents">
-          {filteredEvents.length === 0 ? (
-            <h3>No Events</h3>
-          ) : (
-            filteredEvents.map((row) => {
-              const dateToFormat = new Date(+row.date); //convert row.date to number by using unary operator
-              return (
-                <Card
-                  className="eventCards"
-                  style={{ width: "20rem" }}
-                  key={row._id}
-                >
-                  <Card.Body>
-                    <Card.Title className="cardTitle">{row.name}</Card.Title>
-                    <Card.Text className="cardText">
-                      <Moment>{dateToFormat}</Moment>
-                    </Card.Text>
-                    <Button
-                      className="bookEvent"
-                      onClick={() => handleBooking(row._id)}
-                    >
-                      Attend
-                    </Button>
-                  </Card.Body>
-                </Card>
-              );
-            })
-          )}
-        </div>
+        {filteredEvents.length === 0 ? (
+          <h3>No Events</h3>
+        ) : (
+          <div id="homeEventsDiv">
+            <div id="homeEvents" className="text-left">
+              {
+                //////////////////////
+                (eventDates =
+                  [] &&
+                  filteredEvents.map((row) => {
+                    const dateToFormat = new Date(+row.date);
+                    const eventDate = (dateToFormat + "").substring(0, 15);
+                    const eventTime = (dateToFormat + "").substring(15);
+                    if (!eventDates.includes(eventDate)) {
+                      eventDates.push(eventDate);
+                      return (
+                        <>
+                          <hr
+                            style={
+                              addLine
+                                ? { display: "auto" }
+                                : { display: "none" }
+                            }
+                          />
+                          {(addLine = true)}
+                          <h4>{eventDate}</h4>
+
+                          <div key={row._id} id={row._id}>
+                            <h5 style={{ display: "inline" }}>
+                              <strong>{row.name}</strong>
+                            </h5>
+                            <Button
+                              className="bookEvent"
+                              onClick={() => handleBooking(row._id)}
+                            >
+                              Attend
+                            </Button>
+                            <p className="eventDate">{eventTime}</p>
+                          </div>
+                        </>
+                      );
+                    }
+                    return (
+                      <div key={row._id} id={row._id}>
+                        <h5 style={{ display: "inline" }}>
+                          <strong>{row.name}</strong>
+                        </h5>
+                        <Button
+                          className="bookEvent"
+                          onClick={() => handleBooking(row._id)}
+                        >
+                          Attend
+                        </Button>
+                        <p className="eventDate">{eventTime}</p>
+                      </div>
+                    );
+                  }))
+
+                //////////////////
+              }
+            </div>
+          </div>
+        )}
       </div>
       <Modal show={show} onHide={handleCloseModal}>
         <Modal.Header closeButton>
