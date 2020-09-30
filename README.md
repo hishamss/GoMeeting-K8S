@@ -1,6 +1,6 @@
 # GoMeeting
 
-<h1><a href="https://go-meeting.herokuapp.com/" target="_blank">Go Meeting Deployed</a></h1>
+<h1><a href="https://go-meeting.herokuapp.com/" target="_blank">GoMeeting Link</a></h1>
 
 <h2>Demo Accounts</h2>
 
