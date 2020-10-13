@@ -7,10 +7,10 @@ services:
       - mongoDB
     build:
       dockerfile: Dockerfile.dev
-      context: ./server
+      context: ./api
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api:/app
   client:
     environment:
       - CHOKIDAR_USEPOLLING=true
