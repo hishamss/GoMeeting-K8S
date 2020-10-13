@@ -11,29 +11,7 @@ module.exports = {
 
       return { ...result._doc };
     } catch (err) {
-      throw err;
-    }
-  },
-  deleteMeeting: async (args) => {
-    try {
-      let result = await db.Meetings.deleteOne({
-        _id: args.meetingId,
-      });
-      console.log("deleteMeeting", result);
-      if (result["deletedCount"] === 1) {
-        try {
-          let guestResult = await db.Guests.deleteMany({
-            meeting: args.meetingId,
-          });
-          console.log("deleteGuests", guestResult);
-        } catch (err) {
-          throw err;
-        }
-      }
-      return {
-        ...result,
-      };
-    } catch (err) {
+      console.log("//////////////////////MongodDB: ", err);
       throw err;
     }
   },

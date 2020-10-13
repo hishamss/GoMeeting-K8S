@@ -16,9 +16,11 @@ module.exports = {
           ...result._doc,
         };
       } catch (err) {
+        console.log("////////////////////////////,", err);
         throw err;
       }
     } catch (err) {
+      console.log("//////////////////////MongodDB: ", err);
       throw err;
     }
   },
@@ -44,7 +46,7 @@ module.exports = {
         email: args.email,
         meeting: args.meetingId,
       });
-
+      console.log("deleteGuest", result);
       return {
         ...result,
       };

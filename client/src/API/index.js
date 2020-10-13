@@ -1,5 +1,5 @@
 export const GraphQlAPI = (requestBody) => {
-  return fetch("/graphql", {
+  return fetch("/api/graphql", {
     method: "POST",
     body: JSON.stringify(requestBody),
     headers: {

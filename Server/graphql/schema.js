@@ -23,12 +23,6 @@ type deleteGuest {
     deletedCount: Int
 }
 
-type deleteMeeting {
-    n: Int
-    ok: Int
-    deletedCount: Int
-}
-
 input GuestInput {
     meetingId: ID!
     email: String!   
@@ -51,7 +45,6 @@ type RootMutation {
     createMeeting(meetingInput: MeetingInput): Meeting
     addGuest(guestInput: GuestInput): Guest
     deleteGuest(meetingId: String!, email: String!): deleteGuest
-    deleteMeeting(meetingId: String!): deleteMeeting
 }
 schema {
     query: RootQuery
