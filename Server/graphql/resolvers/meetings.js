@@ -11,6 +11,7 @@ module.exports = {
 
       return { ...result._doc };
     } catch (err) {
+      console.log("//////////////////////MongodDB: ", err);
       throw err;
     }
   },
