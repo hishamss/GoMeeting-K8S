@@ -1,3 +1,4 @@
+language: generic
 sudo: required
 services:
   - docker
@@ -9,15 +10,13 @@ script:
   - docker run -e CI=true hishamss/go-meeting-react-test npm test -- --coverage
 
 #create images for deployment
-  after_success:
-    - docker build -t hishamss/go-meeting-client ./client
-    - docker build -t hishamss/go-meeting-api ./api
-    - docker build -t hishamss/go-meeting-nginx ./nginx
-# Log in to the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-# take those images and push them to docker hub
-- docker push hishamss/go-meeting-client
-- docker push hishamss/go-meeting-api
-- docker push hishamss/go-meeting-nginx
-
-
+after_success:
+  - docker build -t hishamss/go-meeting-client ./client
+  - docker build -t hishamss/go-meeting-api ./api
+  - docker build -t hishamss/go-meeting-nginx ./nginx
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push them to docker hub
+  - docker push hishamss/go-meeting-client
+  - docker push hishamss/go-meeting-api
+  - docker push hishamss/go-meeting-nginx
