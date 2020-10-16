@@ -20,3 +20,15 @@ after_success:
   - docker push hishamss/go-meeting-client
   - docker push hishamss/go-meeting-api
   - docker push hishamss/go-meeting-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "GoMeeting"
+  env: "Gomeeting-env"
+  bucket_name: "elasticbeanstalk-us-east-2-469047678474"
+  bucket_path: "app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
