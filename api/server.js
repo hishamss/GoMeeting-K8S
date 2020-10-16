@@ -8,7 +8,7 @@ const graphQlSchema = require("./graphql/schema");
 const graphQlResolvers = require("./graphql/resolvers");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+require('dotenv').config()
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -32,7 +32,7 @@ app.get("*", (req, res) => {
 //   })
 //MongoDB clustor on Atlas
 mongoose
-  .connect("mongodb+srv://hishamss:22h6m1990@cluster0.0sqbn.mongodb.net/go_meetings?retryWrites=true&w=majority", {
+  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.0sqbn.mongodb.net/go_meetings?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
