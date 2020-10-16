@@ -22,9 +22,17 @@ app.use(
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
+//connect to mongodb container (for development only)
+// mongoose
+//   .connect("mongodb://mongoDB:27017/go_meetings", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   })
+//MongoDB clustor on Atlas
 mongoose
-  .connect("mongodb://mongoDB:27017/go_meetings", {
+  .connect("mongodb+srv://hishamss:22h6m1990@cluster0.0sqbn.mongodb.net/go_meetings?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
