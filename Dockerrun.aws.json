@@ -1,17 +1,19 @@
 {
-    "AWSEBDockerrunVersion": "3",
+    "AWSEBDockerrunVersion": "2",
     "containerDefinitions": [
         {
             "name": "client",
             "image": "hishamss/go-meeting-client",
             "hostname": "client",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "api",
             "image": "hishamss/go-meeting-api",
             "hostname": "api",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "nginx",
@@ -24,7 +26,8 @@
                     "containerPort": 80
                 }
             ],
-            "links": ["client", "api"]
+            "links": ["client", "api"],
+            "memory": 128
         }
     ]
 }
