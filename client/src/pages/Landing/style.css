@@ -1,0 +1,42 @@
+#landingCont {
+  height: calc(100% - 52px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#landingDiv {
+  width: 500px;
+  height: 600px;
+  /* background-image: url("/meetTogother.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  background-color: white;
+  box-shadow: 0px 5px 5px #ccc;
+  border-radius: 5px;
+  border-top: 1px solid #e9e9e9;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#landingU h1 {
+  color: #212121;
+  font-weight: bold;
+}
+
+#joinGoMeeting {
+  background-color: #e83151;
+  border-color: #e83151;
+  font-size: 1.7rem;
+}
+
+#joinGoMeeting:hover,
+#joinGoMeeting:hover {
+  background-color: #d46679;
+  border-color: #db4e65;
+}
