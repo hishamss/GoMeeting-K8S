@@ -8,7 +8,6 @@ const graphQlSchema = require("./graphql/schema");
 const graphQlResolvers = require("./graphql/resolvers");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-require('dotenv').config()
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -40,7 +39,7 @@ app.get("*", (req, res) => {
 //   })
 // connect to mongodb container (for development only)
 mongoose
-  .connect("mongodb://mongo:27017/go_meetings", {
+  .connect(`mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/go_meetings`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
