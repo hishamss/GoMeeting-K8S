@@ -31,8 +31,16 @@ app.get("*", (req, res) => {
 //     useFindAndModify: false,
 //   })
 //MongoDB clustor on Atlas
+// mongoose
+//   .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.0sqbn.mongodb.net/go_meetings?retryWrites=true&w=majority`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//   })
+// connect to mongodb container (for development only)
 mongoose
-  .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.0sqbn.mongodb.net/go_meetings?retryWrites=true&w=majority`, {
+  .connect("mongodb://mongo:27017/go_meetings", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
