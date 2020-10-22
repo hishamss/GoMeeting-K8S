@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: hishamss/go-meeting-client
+      context: client
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        "**/*.js": .
+        "**/*.css": .
+        "**/*.html": .
