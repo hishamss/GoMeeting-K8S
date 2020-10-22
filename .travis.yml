@@ -4,17 +4,12 @@ services:
   - docker
 env:
   global:
-    # get the unique current commit id to be used in the docker image pushed to docker hub
     - SHA=$(git rev-parse HEAD)
-    #disable any prompts from GC during deployment(travis will not be able to answer the prompts like yes/no)
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1  
 before_install:
-  # encrypt the service account json file we created in ruby docker container
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
-  # install google cloud sdk and set it up on travis machine
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
-  # install kubectl on travis machine to interact with kubernates on GC
   - gcloud components update kubectl
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project gomeeting-k8s-293204
