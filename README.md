@@ -51,6 +51,22 @@ Go Meeting: Web app built using Express js and React Platform. It's used to orga
 
 </tr>
 <tr>
+<td>Docker</td>
+<td>https://www.docker.com/</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>https://kubernetes.io/</td>
+</tr>
+<tr>
+<td>Travis CI</td>
+<td>https://travis-ci.org/</td>
+</tr>
+<tr>
+<td>Google Cloud</td>
+<td>https://cloud.google.com/</td>
+</tr>
+<tr>
 <td>React</td>
 <td>https://reactjs.org/</td>
 </tr>
