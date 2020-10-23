@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 # GoMeeting-K8S
-This is GoMeeting events app deployed on Kubernetes 
-=======
-# GoMeeting
 
-<h1><a href="https://go-meeting.herokuapp.com/" target="_blank">GoMeeting Link</a></h1>
+<hr>
+This is GoMeeting app previously created in repo(https://github.com/hishamss/GoMeeting.git), but this time, I put the app components in docker containers and Kubernetes cluster and deployed the app on Google cloud.
 
-<h2>Demo Accounts</h2>
+!["OverView"](OverView.png)
 
-- guest@gmail.com(pass:go@123456)
-- test@gmail.com(pass:go@123456)
+Note: Currently the app is not running on Google cloud to avoid charges from google for running Kuebernetes cluster.
 
 <hr>
 Go Meeting: Web app built using Express js and React Platform. It's used to organize online groups that host in-person events for people with similar interests. The primary purpose of making this application is to use the technology and skills I've learned recently and applied them to a real project to get some hands-on experience.
@@ -127,4 +123,3 @@ Go Meeting: Web app built using Express js and React Platform. It's used to orga
 - <a href="http://portfolio.hishamsaymeh.com">Portfolio</a>
 - <a href="https://www.linkedin.com/in/hisham-saymeh">LinkedIn</a>
 - <a href="https://github.com/hishamss">GitHub</a>
->>>>>>> K8S_deployment
