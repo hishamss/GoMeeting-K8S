@@ -1,11 +1,11 @@
 # GoMeeting-K8S
 
 <hr>
-This is GoMeeting app previously created in repo(https://github.com/hishamss/GoMeeting.git), but this time, I put the app components in docker containers and Kubernetes cluster and deployed the app on Google cloud.
+This is GoMeeting app previously created in repo(https://github.com/hishamss/GoMeeting.git), but this time, I put the app components in Docker containers and Kubernetes cluster and deployed the app on Google cloud. Also I used Travis CI to automate testing and deploying the app on google cloud.
 
 !["OverView"](OverView.png)
 
-Note: Currently the app is not running on Google cloud to avoid charges from google for running Kuebernetes cluster.
+Note: The app is not running currently on Google cloud to avoid charges from google for running Kuebernetes cluster.
 
 <hr>
 Go Meeting: Web app built using Express js and React Platform. It's used to organize online groups that host in-person events for people with similar interests. The primary purpose of making this application is to use the technology and skills I've learned recently and applied them to a real project to get some hands-on experience.
